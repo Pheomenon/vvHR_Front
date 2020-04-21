@@ -33,10 +33,10 @@ export default {
             data:invite
         })
     },
-    bind(){
-        return request({
-            url:`/invite/bind`,
-            method:'get'
-        })
-    }
+    // bind(){
+    //     return request({
+    //         url:`/invite/bind`,
+    //         method:'get'
+    //     })
+    // }
 }

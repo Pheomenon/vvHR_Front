@@ -18,10 +18,9 @@
           class="upload-demo"
           drag
           action="http://localhost:4444/file"
+          :on-success="handleUploadSuccess"
           multiple
-          limit=1
-          accept = ".doc,.docx,.pdf"
-          :on-success="bind"
+          accept=".doc, .docx, .pdf"
         >
           <i class="el-icon-upload"></i>
           <div class="el-upload__text">
@@ -45,7 +44,7 @@ export default {
   data() {
     return {
       invite: {},
-      saveBtnDisabled: false,
+      saveBtnDisabled: false
     };
   },
   created() {
@@ -58,10 +57,9 @@ export default {
     }
   },
   methods: {
-    bind() {
-      inviteApi.bind().then(response => {
-        this.invite.id = response.data.id;
-      });
+    handleUploadSuccess(res, file) {
+      console.log(res.data.url);
+      this.invite.resumeUrl = res.data.url;
     },
     init() {
       //判断路径中是否有ID
