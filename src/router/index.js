@@ -57,6 +57,12 @@ export const constantRouterMap = [
         meta: { title: '新增员工', icon: 'edit' }
       },
       {
+        path: 'import',
+        name: '批量导入员工信息',
+        component: () => import('@/views/hr/employee/import'),
+        meta: { title: '批量导入信息', icon: 'sub_account' }
+      },
+      {
         path: 'edit/:id',
         name: 'EmployeeEdit',
         component: () => import('@/views/hr/employee/save'),

@@ -32,5 +32,12 @@ export default{
             method:'post',
             data:employee
         })
+    },
+    importEmployeeInfo(file){
+        return request({
+            url:`/employee/importEmployeeInfo`,
+            method:'post',
+            data:file
+        })
     }
 }

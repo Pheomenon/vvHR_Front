@@ -6,10 +6,6 @@
       </el-form-item>
       <el-form-item label="类型">
         <el-select v-model="cj.type" clearable placeholder="请选择">
-          <!--
-            数据类型一定要和取出的json中的一致，否则没法回填
-            因此，这里value使用动态绑定的值，保证其数据类型是number
-          -->
           <el-option :value=1 label="奖励" />
           <el-option :value=0 label="惩罚" />
         </el-select>
