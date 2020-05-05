@@ -181,6 +181,22 @@ export const constantRouterMap = [
     ]
   },
 
+  {
+    path: '/modify',
+    component: Layout,
+    redirect: '/modify',
+    name: '修改密码',
+    meta: { title: '修改密码', icon: 'nested' },
+    children: [
+      {
+        path: '',
+        name: '修改密码',
+        component: () => import('@/views/hr/modify/modify'),
+        meta: { title: '修改密码', icon: 'view' }
+      }
+    ]
+  },
+
   { path: '*', redirect: '/404', hidden: true }
 ]
 
