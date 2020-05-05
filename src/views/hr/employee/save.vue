@@ -11,7 +11,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="年龄">
-        <el-input v-model="employee.age" :rows="10" />
+        <el-input-number v-model="employee.age" :rows="10" min="18" max="70" />
       </el-form-item>
       <el-form-item label="所属部门">
         <el-select v-model="employee.departmentName" placeholder="部门名称">

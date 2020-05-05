@@ -31,22 +31,22 @@
         </el-select>
       </el-form-item>
       <el-form-item label="基本工资">
-        <el-input v-model="wage.basicWage" :rows="10" />
+        <el-input-number v-model="wage.basicWage" :rows="10" />
       </el-form-item>
       <el-form-item label="加班次数">
-        <el-input v-model="wage.overtime" :rows="10" />
+        <el-input-number v-model="wage.overtime" :rows="10" />
       </el-form-item>
       <el-form-item label="工龄">
-        <el-input v-model="wage.age" :rows="10" />
+        <el-input-number v-model="wage.age" :rows="10" />
       </el-form-item>
       <el-form-item label="全勤奖">
-        <el-input v-model="wage.payCheck" :rows="10" />
+        <el-input-number v-model="wage.payCheck" :rows="10" />
       </el-form-item>
       <el-form-item label="缺勤罚款">
-        <el-input v-model="wage.payAbsent" :rows="10" />
+        <el-input-number v-model="wage.payAbsent" :rows="10" />
       </el-form-item>
       <el-form-item label="保险费">
-        <el-input v-model="wage.paySafety" :rows="10" />
+        <el-input-number v-model="wage.paySafety" :rows="10" />
       </el-form-item>
 
       <el-form-item>
