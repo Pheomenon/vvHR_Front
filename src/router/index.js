@@ -192,7 +192,7 @@ export const constantRouterMap = [
         path: '',
         name: '修改密码',
         component: () => import('@/views/hr/modify/modify'),
-        meta: { title: '修改密码', icon: 'view' }
+        meta: { title: '修改密码', icon: 'setting' }
       }
     ]
   },

@@ -1,10 +1,13 @@
 <template>
   <div class="app-container">
-    <el-form label-width="120px">
-      <el-form-item label="姓名">
-        <el-input v-model="employee.name" />
+    <el-form ref="employeeForm" label-width="120px" :model="employee">
+      <el-form-item
+        label="姓名"
+        prop="name"
+        :rules="[{ required: true, message: '请输入姓名', trigger: 'blur' }]">
+        <el-input type="text" v-model="employee.name" />
       </el-form-item>
-      <el-form-item label="性别">
+      <el-form-item label="性别" prop="sex">
         <el-select v-model="employee.sex" placeholder="请选择">
           <el-option :value="0" label="女" />
           <el-option :value="1" label="男" />
@@ -125,16 +128,18 @@ export default {
       });
     },
     saveEmployee() {
-      employeeApi.addEmployee(this.employee).then(response => {
-        //提示
-        this.$message({
-          type: "success",
-          message: "添加成功!"
-        });
-        //路由到列表页面
-        this.$router.push({ path: "/employee/table" });
+      this.$refs["employeeForm"].validate(valid => {
+        if (valid) {
+          employeeApi.addEmployee(this.employee).then(response => {
+            this.$message({
+              type: "success",
+              message: "添加成功!"
+            });
+            this.$router.push({ path: "/employee/table" });
+          });
+        }
       });
-    }
+    },
   }
 };
 </script>

@@ -18,6 +18,7 @@
           :disabled="importBtnDisabled"
           :limit="1"
           :action="BASE_API+'/employee/importEmployeeInfo'"
+          accept=".xlsx"
           name="file"
         >
           <el-button slot="trigger" size="small" type="primary">选取文件</el-button>

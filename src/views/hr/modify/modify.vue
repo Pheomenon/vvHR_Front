@@ -135,6 +135,7 @@ export default {
                     type: "success",
                     message: response.message
                 });
+                this.$router.push({path: "/"})
             })
         } else {
           console.log("error submit!!");

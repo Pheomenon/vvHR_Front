@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <el-form label-width="120px">
+    <el-form label-width="120px" :model="wage" ref="wageForm">
       <el-form-item label="所属部门">
         <el-select v-model="wage.department" placeholder="请选择">
           <el-option
@@ -11,8 +11,10 @@
           />
         </el-select>
       </el-form-item>
-      <el-form-item label="姓名">
-        <el-input v-model="wage.name" />
+      <el-form-item label="姓名" prop="name" :rules="[{ required: true, message: '请输入姓名', trigger: 'blur' }]">
+        <el-col :span="3">
+          <el-input v-model="wage.name" />
+        </el-col>
       </el-form-item>
       <el-form-item label="月份">
         <el-select v-model="wage.month" placeholder="请选择">
@@ -30,7 +32,7 @@
           <el-option :value="12" label="十二月" />
         </el-select>
       </el-form-item>
-      <el-form-item label="基本工资">
+      <el-form-item label="基本工资" prop="basicWage" :rules="[{ required: true, message: '该项为必填项', trigger: 'blur' }]">
         <el-input-number v-model="wage.basicWage" :rows="10" />
       </el-form-item>
       <el-form-item label="加班次数">
@@ -78,12 +80,10 @@ export default {
   },
   methods: {
     init() {
-      //判断路径中是否有ID
       if (this.$route.params && this.$route.params.id) {
         const id = this.$route.params.id;
         this.getInfo(id);
       } else {
-        //没有ID进入Else分支，也就是执行了save方法，此时要清空表单
         this.wage = {};
       }
     },
@@ -109,15 +109,17 @@ export default {
       });
     },
     saveWage() {
-      wageApi.addWage(this.wage).then(response => {
-        //提示
+      this.$refs['wageForm'].validate(valid => {
+        if(valid){
+           wageApi.addWage(this.wage).then(response => {
         this.$message({
           type: "success",
           message: "添加成功!"
         });
-        //路由到列表页面
         this.$router.push({ path: "/wage/table" });
       });
+        }
+      })
     },
     departmentName() {
       departmentApi.getDepartment().then(response => {

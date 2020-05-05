@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
-    <el-form label-width="120px">
-      <el-form-item label="标题">
+    <el-form label-width="120px" :model="cj" ref="cjForm">
+      <el-form-item label="标题" prop="title" :rules="[{ required: true, message: '请输入标题', trigger: 'blur' }]">
         <el-input v-model="cj.title" />
       </el-form-item>
       <el-form-item label="类型">
@@ -74,15 +74,18 @@ export default {
       });
     },
     saveCj() {
-      cjApi.addCj(this.cj).then(response => {
-        //提示
+      this.$refs['cjForm'].validate(valid => {
+        if(valid){
+          cjApi.addCj(this.cj).then(response => {
         this.$message({
           type: "success",
           message: "添加成功!"
         });
-        //路由到列表页面
         this.$router.push({ path: "/cj/table" });
       });
+        }
+      })
+      
     }
   }
 };

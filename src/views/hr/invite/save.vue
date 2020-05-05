@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
-    <el-form label-width="120px">
-      <el-form-item label="姓名" width:300px>
+    <el-form ref="inviteForm" label-width="120px" :model="invite">
+      <el-form-item label="姓名" width:300px prop="name" :rules="[{ required: true, message: '请输入姓名', trigger: 'blur' }]">
         <el-col :span="3">
           <el-input v-model="invite.name" width:300px />
         </el-col>
@@ -93,14 +93,16 @@ export default {
       });
     },
     saveInvite() {
-      inviteApi.addInvite(this.invite).then(response => {
-        //提示
-        this.$message({
-          type: "success",
-          message: "添加成功!"
-        });
-        //路由到列表页面
+      this.$refs["inviteForm"].validate(valid => {
+        if(valid){
+          inviteApi.addInvite(this.invite).then(response => {
+            this.$message({
+              type: "success",
+              message: "添加成功!"
+            });
         this.$router.push({ path: "/invite/table" });
+          });
+        }
       });
     }
   }
