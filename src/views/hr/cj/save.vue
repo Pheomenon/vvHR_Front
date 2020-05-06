@@ -4,7 +4,7 @@
       <el-form-item label="标题" prop="title" :rules="[{ required: true, message: '请输入标题', trigger: 'blur' }]">
         <el-input v-model="cj.title" />
       </el-form-item>
-      <el-form-item label="类型">
+      <el-form-item label="类型" prop="type" :rules="[{ required: true, message: '请选择类型', trigger: 'blur' }]">
         <el-select v-model="cj.type" clearable placeholder="请选择">
           <el-option :value=1 label="奖励" />
           <el-option :value=0 label="惩罚" />

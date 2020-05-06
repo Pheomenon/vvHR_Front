@@ -39,5 +39,11 @@ export default{
             method:'post',
             data:file
         })
-    }
+    },
+    employeeExist(employeeName){
+        return request({
+            url:`/employee/${employeeName}`,
+            method:'post'
+        })
+    },
 }

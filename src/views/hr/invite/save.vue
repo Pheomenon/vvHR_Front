@@ -6,7 +6,7 @@
           <el-input v-model="invite.name" width:300px />
         </el-col>
       </el-form-item>
-      <el-form-item label="性别">
+      <el-form-item ref="inviteForm" label="性别" prop="sex" :rules="[{ required: true, message: '请选择性别', trigger: 'blur' }]">
         <el-select v-model="invite.sex" placeholder="请选择">
           <el-option :value="1" label="男" />
           <el-option :value="0" label="女" />
