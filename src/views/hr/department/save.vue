@@ -2,10 +2,10 @@
   <div class="app-container">
     <el-form label-width="120px" :model="department" ref="departmentForm">
       <el-form-item label="部门名称" prop="name" :rules="[{ required: true, message: '该项为必填项', trigger: 'blur' }]">
-        <el-input v-model="department.name" />
+        <el-input v-model="department.name" maxlength="30"/>
       </el-form-item>
       <el-form-item label="备注">
-        <el-input v-model="department.bz" :rows="10" type="textarea" />
+        <el-input v-model="department.bz" :rows="10" type="textarea" maxlength="1000"/>
       </el-form-item>
 
       <el-form-item>

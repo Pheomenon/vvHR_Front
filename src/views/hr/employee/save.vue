@@ -4,8 +4,9 @@
       <el-form-item
         label="姓名"
         prop="name"
-        :rules="[{ required: true, message: '请输入姓名', trigger: 'blur' }]">
-        <el-input type="text" v-model="employee.name" />
+        :rules="[{ required: true, message: '请输入姓名', trigger: 'blur' }]"
+      >
+        <el-input type="text" v-model="employee.name" maxlength="20" />
       </el-form-item>
       <el-form-item label="性别" prop="sex">
         <el-select v-model="employee.sex" placeholder="请选择">
@@ -26,14 +27,18 @@
           />
         </el-select>
       </el-form-item>
-      <el-form-item label="身份证号">
-        <el-input v-model="employee.idCard" :rows="10" />
+      <el-form-item
+        label="身份证号"
+        prop="idCard"
+        :rules="[{validator: validateIdCard, trigger: 'blur'}]"
+      >
+        <el-input v-model="employee.idCard" />
       </el-form-item>
       <el-form-item label="出生日期">
-        <el-date-picker v-model="employee.born" type="date" placeholder="选择日期"></el-date-picker>
+        <el-date-picker v-model="employee.born" type="date" value-format="yyyy-MM-dd" placeholder="选择日期"></el-date-picker>
       </el-form-item>
       <el-form-item label="国籍">
-        <el-input v-model="employee.nation" :rows="10" />
+        <el-input v-model="employee.nation" maxlength="20"/>
       </el-form-item>
       <el-form-item label="婚姻状况">
         <el-select v-model="employee.marriage" placeholder="请选择">
@@ -48,19 +53,19 @@
         </el-select>
       </el-form-item>
       <el-form-item label="籍贯">
-        <el-input v-model="employee.hometown" :rows="10" />
+        <el-input v-model="employee.hometown" :rows="10"  maxlength="60"/>
       </el-form-item>
-      <el-form-item label="电话">
-        <el-input v-model="employee.tel" :rows="10" />
+      <el-form-item label="电话" prop="tel" maxlength="11" :rules="[{validator: checkPhone, trigger: 'blur'}]">
+        <el-input v-model="employee.tel" />
       </el-form-item>
       <el-form-item label="住址">
-        <el-input v-model="employee.address" :rows="10" />
+        <el-input v-model="employee.address" maxlength="60" />
       </el-form-item>
       <el-form-item label="专业">
-        <el-input v-model="employee.speciality" :rows="10" />
+        <el-input v-model="employee.speciality" maxlength="20"/>
       </el-form-item>
       <el-form-item label="学历">
-        <el-input v-model="employee.culture" :rows="10" />
+        <el-input v-model="employee.culture" maxlength="20"/>
       </el-form-item>
 
       <el-form-item>
@@ -77,7 +82,7 @@ export default {
     return {
       employee: {},
       saveBtnDisabled: false,
-      departmentNameList: null
+      departmentNameList: null,
     };
   },
   created() {
@@ -140,6 +145,19 @@ export default {
         }
       });
     },
+    validateIdCard(rule, value, callback) {
+      var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+      if (!reg.test(value) && value.length != 0) {
+        return callback(new Error("身份证号格式不正确"));
+      }
+      return callback();
+    },
+    checkPhone (rule, value, callback) {
+      if (!(/^1[34578]\d{9}$/.test(value)) && value.length != 0) {
+        return callback(new Error('手机号码格式不正确'))
+      }
+      return callback()
+    }
   }
 };
 </script>

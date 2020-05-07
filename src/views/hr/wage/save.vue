@@ -13,7 +13,7 @@
       </el-form-item>
       <el-form-item label="姓名" prop="name" :rules="[{ required: true, message: '请输入姓名', trigger: 'blur' },{validator: checkExist, trigger: 'blur'}]">
         <el-col :span="3">
-          <el-input v-model="wage.name" />
+          <el-input v-model="wage.name" maxlength="20"/>
         </el-col>
       </el-form-item>
       <el-form-item label="月份" prop="month" :rules="[{ required: true, message: '请输入月份', trigger: 'blur' }]">

@@ -1,9 +1,9 @@
 <template>
   <div class="app-container">
     <el-form ref="inviteForm" label-width="120px" :model="invite">
-      <el-form-item label="姓名" width:300px prop="name" :rules="[{ required: true, message: '请输入姓名', trigger: 'blur' }]">
+      <el-form-item label="姓名" prop="name" :rules="[{ required: true, message: '请输入姓名', trigger: 'blur' }]">
         <el-col :span="3">
-          <el-input v-model="invite.name" width:300px />
+          <el-input v-model="invite.name" maxlength="20"/>
         </el-col>
       </el-form-item>
       <el-form-item ref="inviteForm" label="性别" prop="sex" :rules="[{ required: true, message: '请选择性别', trigger: 'blur' }]">

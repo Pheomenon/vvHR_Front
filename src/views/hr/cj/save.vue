@@ -2,7 +2,7 @@
   <div class="app-container">
     <el-form label-width="120px" :model="cj" ref="cjForm">
       <el-form-item label="标题" prop="title" :rules="[{ required: true, message: '请输入标题', trigger: 'blur' }]">
-        <el-input v-model="cj.title" />
+        <el-input v-model="cj.title" maxlength="30" />
       </el-form-item>
       <el-form-item label="类型" prop="type" :rules="[{ required: true, message: '请选择类型', trigger: 'blur' }]">
         <el-select v-model="cj.type" clearable placeholder="请选择">
@@ -14,7 +14,7 @@
         <el-input-number v-model="cj.money" controls-position="right" min="0" />
       </el-form-item>
       <el-form-item label="奖惩详情">
-        <el-input v-model="cj.content" :rows="10" type="textarea" />
+        <el-input v-model="cj.content" :rows="10" type="textarea" maxlength="1000" />
       </el-form-item>
 
       <el-form-item>
