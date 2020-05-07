@@ -33,22 +33,19 @@
         </el-select>
       </el-form-item>
       <el-form-item label="基本工资" prop="basicWage" :rules="[{ required: true, message: '该项为必填项', trigger: 'blur' }]">
-        <el-input-number v-model="wage.basicWage" :rows="10" min="0"/>
+        <el-input-number v-model="wage.basicWage" :rows="10" :precision="2" :step="1" max=1000000 min="0"/>
       </el-form-item>
-      <el-form-item label="加班次数">
-        <el-input-number v-model="wage.overtime" :rows="10" min="0"/>
-      </el-form-item>
-      <el-form-item label="工龄">
-        <el-input-number v-model="wage.age" :rows="10" min="0"/>
+      <el-form-item label="加班费">
+        <el-input-number v-model="wage.overtime" :rows="10" :precision="2" :step="1" max=1000000 min="0"/>
       </el-form-item>
       <el-form-item label="全勤奖">
-        <el-input-number v-model="wage.payCheck" :rows="10"  min="0"/>
+        <el-input-number v-model="wage.payCheck" :rows="10" :precision="2" :step="1" max=1000000  min="0"/>
       </el-form-item>
       <el-form-item label="缺勤罚款">
-        <el-input-number v-model="wage.payAbsent" :rows="10" min="0"/>
+        <el-input-number v-model="wage.payAbsent" :rows="10" :precision="2" :step="1" max=1000000 min="0"/>
       </el-form-item>
       <el-form-item label="保险费">
-        <el-input-number v-model="wage.paySafety" :rows="10" min="0"/>
+        <el-input-number v-model="wage.paySafety" :rows="10" :precision="2" :step="1" max=1000000 min="0"/>
       </el-form-item>
 
       <el-form-item>
@@ -126,6 +123,7 @@ export default {
       this.$refs['wageForm'].validate(valid => {
         if(valid){
            wageApi.addWage(this.wage).then(response => {
+             console.log(this.wage)
         this.$message({
           type: "success",
           message: "添加成功!"

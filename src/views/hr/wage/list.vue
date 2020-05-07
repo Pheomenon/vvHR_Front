@@ -14,13 +14,12 @@
           <template slot-scope="scope">{{ month(scope.row.month) }}</template>
       </el-table-column>
       <el-table-column prop="basicWage" label="基本工资" align="center"></el-table-column>
-      <el-table-column prop="overtime" label="加班次数" align="center"></el-table-column>
-      <el-table-column prop="age" label="工龄" align="center"></el-table-column>
+      <el-table-column prop="overtime" label="加班费" align="center"></el-table-column>
       <el-table-column prop="payCheck" label="全勤奖" align="center"></el-table-column>
       <el-table-column prop="payAbsent" label="缺勤罚款" align="center"></el-table-column>
       <el-table-column prop="paySafety" label="保险费" align="center"></el-table-column>
       <el-table-column prop="0" label="合计" align="center">
-          <template slot-scope="scope">{{ scope.row.basicWage+scope.row.overtime*150+scope.row.payCheck-scope.row.payAbsent+scope.row.paySafety }}</template>
+          <template slot-scope="scope">{{ scope.row.basicWage+scope.row.overtime+scope.row.payCheck-scope.row.payAbsent+scope.row.paySafety }}</template>
       </el-table-column>
       <el-table-column label="操作" align="center" width="180">
         <template slot-scope="scope">
