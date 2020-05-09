@@ -10,22 +10,22 @@
     >
       <el-form-item label="用户名" prop="username">
         <el-col :span="8">
-          <el-input v-model="ruleForm.username"></el-input>
+          <el-input v-model="ruleForm.username" maxlength="100"></el-input>
         </el-col>
       </el-form-item>
       <el-form-item label="旧密码" prop="password">
         <el-col :span="8">
-          <el-input type="password" v-model="ruleForm.password" autocomplete="off"></el-input>
+          <el-input type="password" v-model="ruleForm.password" autocomplete="off" maxlength="100"></el-input>
         </el-col>
       </el-form-item>
       <el-form-item label="新密码" prop="newPassword">
         <el-col :span="8">
-          <el-input type="password" v-model="ruleForm.newPassword" autocomplete="off"></el-input>
+          <el-input type="password" v-model="ruleForm.newPassword" autocomplete="off" maxlength="100"></el-input>
         </el-col>
       </el-form-item>
       <el-form-item label="确认密码" prop="checkPass">
         <el-col :span="8">
-          <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
+          <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off" maxlength="100"></el-input>
         </el-col>
       </el-form-item>
       <el-form-item label="验证码" prop="code">

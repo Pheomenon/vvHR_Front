@@ -13,12 +13,14 @@
         </el-select>
       </el-form-item>
 
-      <el-form-item label="上传简历" width:300px>
+      <el-form-item label="上传简历" width:300px >
         <el-upload
           class="upload-demo"
           drag
           action="http://localhost:4444/file"
           :on-success="handleUploadSuccess"
+          :limit="1"
+          :before-upload="checkSize"
           multiple
           accept=".doc, .docx, .pdf"
         >
@@ -104,7 +106,18 @@ export default {
           });
         }
       });
-    }
+    },
+    checkSize(file){
+      const isLe10M = file.size / 1024 / 1024 < 10
+      //10485760字节
+      if(!isLe10M) {
+					this.$message({
+						message: '上传文件大小不能超过 10MB!',
+						type: 'warning'
+          });
+          return false
+			}
+    },
   }
 };
 </script>
