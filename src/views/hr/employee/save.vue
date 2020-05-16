@@ -4,7 +4,7 @@
       <el-form-item
         label="姓名"
         prop="name"
-        :rules="[{ required: true, message: '请输入姓名', trigger: 'blur' }]"
+        :rules="[{ required: true, validator: validateName, trigger: 'blur' }]"
       >
         <el-input type="text" v-model="employee.name" maxlength="20" />
       </el-form-item>
@@ -30,15 +30,20 @@
       <el-form-item
         label="身份证号"
         prop="idCard"
-        :rules="[{validator: validateIdCard, trigger: 'blur'}]"
+        :rules="[{ required: true, validator: validateIdCard, trigger: 'blur'}]"
       >
         <el-input v-model="employee.idCard" />
       </el-form-item>
       <el-form-item label="出生日期">
-        <el-date-picker v-model="employee.born" type="date" value-format="yyyy-MM-dd" placeholder="选择日期"></el-date-picker>
+        <el-date-picker
+          v-model="employee.born"
+          type="date"
+          value-format="yyyy-MM-dd"
+          placeholder="选择日期"
+        ></el-date-picker>
       </el-form-item>
       <el-form-item label="国籍">
-        <el-input v-model="employee.nation" maxlength="20"/>
+        <el-input v-model="employee.nation" maxlength="20" />
       </el-form-item>
       <el-form-item label="婚姻状况">
         <el-select v-model="employee.marriage" placeholder="请选择">
@@ -53,19 +58,24 @@
         </el-select>
       </el-form-item>
       <el-form-item label="籍贯">
-        <el-input v-model="employee.hometown" :rows="10"  maxlength="60"/>
+        <el-input v-model="employee.hometown" :rows="10" maxlength="60" />
       </el-form-item>
-      <el-form-item label="电话" prop="tel" maxlength="11" :rules="[{validator: checkPhone, trigger: 'blur'}]">
+      <el-form-item
+        label="电话"
+        prop="tel"
+        maxlength="11"
+        :rules="[{ required: true, validator: checkPhone, trigger: 'blur'}]"
+      >
         <el-input v-model="employee.tel" />
       </el-form-item>
       <el-form-item label="住址">
         <el-input v-model="employee.address" maxlength="60" />
       </el-form-item>
       <el-form-item label="专业">
-        <el-input v-model="employee.speciality" maxlength="20"/>
+        <el-input v-model="employee.speciality" maxlength="20" />
       </el-form-item>
       <el-form-item label="学历">
-        <el-input v-model="employee.culture" maxlength="20"/>
+        <el-input v-model="employee.culture" maxlength="20" />
       </el-form-item>
 
       <el-form-item>
@@ -82,7 +92,7 @@ export default {
     return {
       employee: {},
       saveBtnDisabled: false,
-      departmentNameList: null,
+      departmentNameList: null
     };
   },
   created() {
@@ -124,12 +134,16 @@ export default {
       }
     },
     updateEmployee() {
-      employeeApi.updateEmployee(this.employee).then(response => {
-        this.$message({
-          type: "success",
-          message: "修改成功!"
-        });
-        this.$router.push({ path: "/employee/table" });
+      this.$refs["employeeForm"].validate(valid => {
+        if (valid) {
+          employeeApi.updateEmployee(this.employee).then(response => {
+            this.$message({
+              type: "success",
+              message: "修改成功!"
+            });
+            this.$router.push({ path: "/employee/table" });
+          });
+        }
       });
     },
     saveEmployee() {
@@ -145,18 +159,25 @@ export default {
         }
       });
     },
+    validateName(rule, value, callback) {
+      var reg = /^([\u4e00-\u9fa5\·]{1,10})$/;
+      if (!reg.test(value) || this.value == "") {
+        return callback(new Error("请输入正确的姓名"));
+      }
+      return callback();
+    },
     validateIdCard(rule, value, callback) {
       var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
-      if (!reg.test(value) || this.value == '') {
+      if (!reg.test(value) || this.value == "") {
         return callback(new Error("请输入正确的身份证号"));
       }
       return callback();
     },
-    checkPhone (rule, value, callback) {
-      if (!(/^1[34578]\d{9}$/.test(value)) || value == '') {
-        return callback(new Error('请输入正确的手机号'))
+    checkPhone(rule, value, callback) {
+      if (!/^1[34578]\d{9}$/.test(value) || value == "") {
+        return callback(new Error("请输入正确的手机号"));
       }
-      return callback()
+      return callback();
     }
   }
 };

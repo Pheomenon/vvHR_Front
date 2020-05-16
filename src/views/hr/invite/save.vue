@@ -1,19 +1,28 @@
 <template>
   <div class="app-container">
     <el-form ref="inviteForm" label-width="120px" :model="invite">
-      <el-form-item label="姓名" prop="name" :rules="[{ required: true, message: '请输入姓名', trigger: 'blur' }]">
+      <el-form-item
+        label="姓名"
+        prop="name"
+        :rules="[{ required: true, message: '请输入姓名', trigger: 'blur' }]"
+      >
         <el-col :span="3">
-          <el-input v-model="invite.name" maxlength="20"/>
+          <el-input v-model="invite.name" maxlength="20" />
         </el-col>
       </el-form-item>
-      <el-form-item ref="inviteForm" label="性别" prop="sex" :rules="[{ required: true, message: '请选择性别', trigger: 'blur' }]">
+      <el-form-item
+        ref="inviteForm"
+        label="性别"
+        prop="sex"
+        :rules="[{ required: true, message: '请选择性别', trigger: 'blur' }]"
+      >
         <el-select v-model="invite.sex" placeholder="请选择">
           <el-option :value="1" label="男" />
           <el-option :value="0" label="女" />
         </el-select>
       </el-form-item>
 
-      <el-form-item label="上传简历" width:300px >
+      <el-form-item label="上传简历" width:300px>
         <el-upload
           class="upload-demo"
           drag
@@ -86,38 +95,42 @@ export default {
       }
     },
     updateInvite() {
-      inviteApi.updateInvite(this.invite).then(response => {
-        this.$message({
-          type: "success",
-          message: "修改成功!"
-        });
-        this.$router.push({ path: "/invite/table" });
+      this.$refs["inviteForm"].validate(valid => {
+        if (valid) {
+          inviteApi.updateInvite(this.invite).then(response => {
+            this.$message({
+              type: "success",
+              message: "修改成功!"
+            });
+            this.$router.push({ path: "/invite/table" });
+          });
+        }
       });
     },
     saveInvite() {
       this.$refs["inviteForm"].validate(valid => {
-        if(valid){
+        if (valid) {
           inviteApi.addInvite(this.invite).then(response => {
             this.$message({
               type: "success",
               message: "添加成功!"
             });
-        this.$router.push({ path: "/invite/table" });
+            this.$router.push({ path: "/invite/table" });
           });
         }
       });
     },
-    checkSize(file){
-      const isLe10M = file.size / 1024 / 1024 < 10
+    checkSize(file) {
+      const isLe10M = file.size / 1024 / 1024 < 10;
       //10485760字节
-      if(!isLe10M) {
-					this.$message({
-						message: '上传文件大小不能超过 10MB!',
-						type: 'warning'
-          });
-          return false
-			}
-    },
+      if (!isLe10M) {
+        this.$message({
+          message: "上传文件大小不能超过 10MB!",
+          type: "warning"
+        });
+        return false;
+      }
+    }
   }
 };
 </script>
