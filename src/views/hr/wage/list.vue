@@ -6,6 +6,7 @@
       </el-form-item>
 
       <el-button type="primary" icon="el-icon-search" @click="getList()">查询</el-button>
+      <el-button type="default" @click="resetData()">清空</el-button>
     </el-form>
     <el-table :data="list" style="width: 100%" border stripe fit highlight-current-row>
       <el-table-column prop="department" label="所属部门" width="130" align="center"></el-table-column>
