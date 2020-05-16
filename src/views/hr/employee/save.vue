@@ -147,14 +147,14 @@ export default {
     },
     validateIdCard(rule, value, callback) {
       var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
-      if (!reg.test(value) && value.length != 0) {
-        return callback(new Error("身份证号格式不正确"));
+      if (!reg.test(value) || this.value == '') {
+        return callback(new Error("请输入正确的身份证号"));
       }
       return callback();
     },
     checkPhone (rule, value, callback) {
-      if (!(/^1[34578]\d{9}$/.test(value)) && value.length != 0) {
-        return callback(new Error('手机号码格式不正确'))
+      if (!(/^1[34578]\d{9}$/.test(value)) || value == '') {
+        return callback(new Error('请输入正确的手机号'))
       }
       return callback()
     }
