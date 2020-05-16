@@ -19,7 +19,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="金额">
-        <el-input-number v-model="cj.money" controls-position="right" min="0" />
+        <el-input-number v-model="cj.money" controls-position="right" min="0" max="10000" />
       </el-form-item>
       <el-form-item label="奖惩详情">
         <el-input v-model="cj.content" :rows="10" type="textarea" maxlength="1000" />
