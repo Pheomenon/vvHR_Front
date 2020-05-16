@@ -4,7 +4,7 @@
       <el-form-item
         label="姓名"
         prop="name"
-        :rules="[{ required: true, message: '请输入姓名', trigger: 'blur' }]"
+        :rules="[{ required: true, validator: validateName, trigger: 'blur' }]"
       >
         <el-col :span="3">
           <el-input v-model="invite.name" maxlength="20" />
@@ -130,7 +130,14 @@ export default {
         });
         return false;
       }
-    }
+    },
+    validateName(rule, value, callback) {
+      var reg = /^([\u4e00-\u9fa5\·]{1,10})$/;
+      if (!reg.test(value) || this.value == "") {
+        return callback(new Error("请输入正确的姓名"));
+      }
+      return callback();
+    },
   }
 };
 </script>
