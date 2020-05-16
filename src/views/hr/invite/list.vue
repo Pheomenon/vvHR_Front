@@ -42,6 +42,7 @@
               size="mini"
               icon="el-icon-success"
               @click="hire(scope.row.id)"
+              v-if="scope.row.isHire!=1"
             >录用</el-button>
 
           <!-- scope是表格的所有元素的集合 -->

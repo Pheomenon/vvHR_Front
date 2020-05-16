@@ -94,19 +94,19 @@ export default {
         this.saveInvite();
       }
     },
-    updateInvite() {
-      this.$refs["inviteForm"].validate(valid => {
-        if (valid) {
-          inviteApi.updateInvite(this.invite).then(response => {
-            this.$message({
-              type: "success",
-              message: "修改成功!"
-            });
-            this.$router.push({ path: "/invite/table" });
-          });
-        }
-      });
-    },
+    // updateInvite() {
+    //   this.$refs["inviteForm"].validate(valid => {
+    //     if (valid) {
+    //       inviteApi.updateInvite(this.invite).then(response => {
+    //         this.$message({
+    //           type: "success",
+    //           message: "修改成功!"
+    //         });
+    //         this.$router.push({ path: "/invite/table" });
+    //       });
+    //     }
+    //   });
+    // },
     saveInvite() {
       this.$refs["inviteForm"].validate(valid => {
         if (valid) {
