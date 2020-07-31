@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <el-form :inline="true" class="demo-form-inline" align="center">
+    <el-form :inline="true" class="form" align="center">
       <el-form-item>
         <el-select v-model="employeeQuery.departmentName" placeholder="部门名称">
           <el-option
@@ -36,14 +36,19 @@
     </el-form>
 
     <el-table :data="list" style="width: 100%" border stripe fit highlight-current-row>
-      <el-table-column prop="name" label="姓名" width="180" align="center"></el-table-column>
-      <el-table-column prop="sex" label="性别" width="180" align="center">
+      <el-table-column prop="id" label="员工编号" width="80" align="center"></el-table-column>
+      <el-table-column prop="name" label="姓名" width="110" align="center"></el-table-column>
+      <el-table-column sortable prop="sex" label="性别" width="80" align="center">
         <template slot-scope="scope">{{ scope.row.sex==1?'男':'女' }}</template>
       </el-table-column>
-      <el-table-column prop="age" label="年龄" align="center"></el-table-column>
+      <el-table-column sortable prop="age" label="年龄" width="100" align="center"></el-table-column>
       <el-table-column prop="departmentName" label="所属部门" align="center"></el-table-column>
+      <el-table-column sortable prop="level" label="职级" width="130" align="center">
+        <template slot-scope="scope">{{ scope.row.level!== null ? scope.row.level+'级' : "" }}</template>
+      </el-table-column>
+      <el-table-column prop="position" label="职位" width="130" align="center"></el-table-column>
       <el-table-column prop="tel" label="电话" align="center"></el-table-column>
-      <el-table-column prop="createTime" label="修改时间" align="center"></el-table-column>
+      <el-table-column sortable prop="createTime" label="修改时间" align="center"></el-table-column>
       <el-table-column label="操作" align="center">
         <template slot-scope="scope">
           <router-link :to="'/employee/edit/'+scope.row.id">

@@ -32,7 +32,7 @@
         <el-col :span="6">
           <el-input v-model.number="ruleForm.code"></el-input>
         </el-col>
-        <el-button type="primary" @click="sendVerifyCode()">发送验证码</el-button>
+        <el-button type="primary" :disabled="smsButtonDisabled" @click.once="sendVerifyCode()">发送验证码</el-button>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
@@ -91,7 +91,8 @@ export default {
         newPassword: "",
         checkPass: "",
         code: "",
-        password: ""
+        password: "",
+        smsButtonDisabled: false,
       },
       rules: {
         newPassword: [{ validator: validatePass, trigger: "blur" }],
@@ -106,6 +107,7 @@ export default {
   methods: {
     sendVerifyCode(){
         if(this.ruleForm.newPassword == this.ruleForm.checkPass && this.ruleForm.username && this.ruleForm.newPassword){
+            this.smsButtonDisabled = true
             this.userForm.username = this.ruleForm.username
             this.userForm.password = this.ruleForm.password
             modifyApi.sendVerifyCode(this.userForm).then(response => {

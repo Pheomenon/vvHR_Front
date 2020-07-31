@@ -32,5 +32,18 @@ export default {
             method:'post',
             data:wage
         })
+    },
+    storeSelected(wage){
+        return request({
+            url:`/wage/batchOperate`,
+            method:'post',
+            data:wage
+        })
+    },
+    getSelected(){
+        return request({
+            url:`/wage/batchOperate`,
+            method:'get',
+        })
     }
 }

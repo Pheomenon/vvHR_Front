@@ -36,8 +36,9 @@
       </el-table-column>
       <el-table-column prop="title" label="标题" width="180" align="center"></el-table-column>
       <el-table-column prop="content" label="详细" align="center"></el-table-column>
-      <el-table-column prop="money" label="金额" align="center"></el-table-column>
-      <el-table-column prop="time" label="时间" align="center"></el-table-column>
+      <el-table-column sortable prop="money" label="金额" align="center"></el-table-column>
+      <el-table-column sortable prop="date" label="月份" align="center"></el-table-column>
+      <el-table-column sortable prop="time" label="创建时间" align="center"></el-table-column>
       <el-table-column label="操作" align="center">
         <template slot-scope="scope">
           <router-link :to="'/cj/edit/'+scope.row.id">

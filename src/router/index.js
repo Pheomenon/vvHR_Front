@@ -98,20 +98,20 @@ export const constantRouterMap = [
     path: '/wage',
     component: Layout,
     redirect: '/wage/table',
-    name: '人事支出管理',
-    meta: { title: '人事支出管理', icon: 'form' },
+    name: '薪酬管理',
+    meta: { title: '薪酬管理', icon: 'form' },
     children: [
       {
         path: 'table',
-        name: '人事支出概览',
+        name: '薪酬概览',
         component: () => import('@/views/hr/wage/list'),
-        meta: { title: '人事支出概览', icon: 'view' }
+        meta: { title: '薪酬概览', icon: 'view' }
       },
       {
         path: 'save',
-        name: '录入支出',
+        name: '录入薪酬',
         component: () => import('@/views/hr/wage/save'),
-        meta: { title: '录入支出', icon: 'edit' }
+        meta: { title: '录入薪酬', icon: 'edit' }
       },
       {
         path: 'edit/:id',

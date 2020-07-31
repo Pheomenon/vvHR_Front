@@ -25,16 +25,16 @@
     </el-form>
     <el-table :data="list" style="width: 100%" border stripe fit highlight-current-row>
       <el-table-column prop="name" label="姓名" width="180" align="center"></el-table-column>
-      <el-table-column prop="sex" label="性别" width="180" align="center">
+      <el-table-column sortable prop="sex" label="性别" width="180" align="center">
         <template slot-scope="scope">{{ scope.row.sex==1?'男':'女' }}</template>
       </el-table-column>
-      <el-table-column prop="isHire" label="是否录用" align="center">
+      <el-table-column sortable prop="isHire" label="是否录用" align="center">
         <template slot-scope="scope">{{ scope.row.isHire==1?'录用':'未录用' }}</template>
       </el-table-column>
       <el-table-column prop="createTime" label="登记时间" align="center"></el-table-column>
       <el-table-column label="操作" align="center">
         <template slot-scope="scope">
-          <el-button type="info" size="mini" icon="el-icon-view" @click="check(scope.row.id)">查看简历</el-button>
+          <el-button type="info" size="mini" icon="el-icon-view" @click="check(scope.row.id)" v-if="scope.row.resumeUrl !== null">查看简历</el-button>
 
           <!-- 点录用以后给employee发个请求把invite里的姓名和性别加入 TODO -->
             <el-button

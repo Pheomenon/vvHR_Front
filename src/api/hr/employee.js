@@ -46,4 +46,29 @@ export default{
             method:'post'
         })
     },
+    checkEmployeeInDepartment(employee){
+        return request({
+            url:`/employee/checkEmployeeInDepartment`,
+            method:'post',
+            data:employee
+        })
+    },
+    getEmployeeNameUseDepartment(departmentName){
+        return request({
+            url:`/employee/getEmployeeNameUseDepartment/${departmentName}`,
+            method:'post'
+        })
+    },
+    getEmployeeIdCardUseName(employeeName){
+        return request({
+            url:`/employee/getEmployeeIdCardUseName/${employeeName}`,
+            method:'post'
+        })
+    },
+    getLevelUseIdCard(idCard){
+        return request({
+            url: `/employee/getLevelUseIdCard/${idCard}`,
+            method:'post'
+        })
+    }
 }

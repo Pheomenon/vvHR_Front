@@ -14,8 +14,11 @@
           ref="upload"
           :auto-upload="false"
           :on-success="fileUploadSuccess"
+          :on-change="changeImportButtonState"
           :on-error="fileUploadError"
           :disabled="importBtnDisabled"
+          :on-exceed="hintExceedLimit"
+          :before-remove="changeImportButtonState"
           :limit="1"
           :action="BASE_API+'/employee/importEmployeeInfo'"
           accept=".xlsx"
@@ -28,6 +31,7 @@
             size="small"
             type="success"
             @click="submitUpload"
+            :disabled="batchImportButton"
           >{{ fileUploadBtnText }}</el-button>
         </el-upload>
       </el-form-item>
@@ -42,7 +46,8 @@ export default {
       BASE_API: process.env.BASE_API, // 接口API地址
       fileUploadBtnText: "批量导入", // 按钮文字
       importBtnDisabled: false, // 按钮是否禁用,
-      loading: false
+      loading: false, //loading动画
+      batchImportButton: true
     };
   },
   created() {},
@@ -65,6 +70,15 @@ export default {
         message: "导入成功"
       });
       this.$router.push({ path: "/employee/table" });
+    },
+    changeImportButtonState(){
+      this.batchImportButton == false ? this.batchImportButton = true : this.batchImportButton = false 
+    },
+    hintExceedLimit(){
+      this.$message({
+        type: "error",
+        message: "只允许导入一个文件，如需更换待导入的文件请先移除文件列表中的文件，再重新上传！"
+      })
     },
     //上传失败
     fileUploadError() {

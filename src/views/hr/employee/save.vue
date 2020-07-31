@@ -14,10 +14,18 @@
           <el-option :value="1" label="男" />
         </el-select>
       </el-form-item>
-      <el-form-item label="年龄">
-        <el-input-number v-model="employee.age" :rows="10" min="18" max="70" />
+      <el-form-item 
+        label="年龄"
+        prop="age"
+        :rules="[{ required: true, message: '请输入年龄', trigger: 'blur'},{validator: checkAge, trigger: 'blur'}]"
+      >
+        <el-input-number v-model="employee.age" :rows="10" />
       </el-form-item>
-      <el-form-item label="所属部门">
+      <el-form-item 
+      label="所属部门"
+      prop="departmentName"
+      :rules="[{ required: true, message: '该项为必填项', trigger: 'blur' }]"
+      >
         <el-select v-model="employee.departmentName" placeholder="部门名称">
           <el-option
             v-for="departmentName in departmentNameList"
@@ -27,6 +35,24 @@
           />
         </el-select>
       </el-form-item>
+
+      <el-form-item
+      label="职级"
+      prop="level"
+      :rules="[{ required: true, message: '该项为必填项', trigger: 'blur' }]"
+      >
+        <el-select v-model="employee.level" placeholder="请选择">
+          <el-option :value="1" label="一级" />
+          <el-option :value="2" label="二级" />
+          <el-option :value="3" label="三级" />
+          <el-option :value="4" label="四级" />
+          <el-option :value="5" label="五级" />
+        </el-select>
+      </el-form-item>
+
+      <el-form-item label="职位">
+        <el-input v-model="employee.position" placeholder="请输入"></el-input>
+      </el-form-item>
       <el-form-item
         label="身份证号"
         prop="idCard"
@@ -34,14 +60,14 @@
       >
         <el-input v-model="employee.idCard" />
       </el-form-item>
-      <el-form-item label="出生日期">
+      <!-- <el-form-item label="出生日期">
         <el-date-picker
           v-model="employee.born"
           type="date"
           value-format="yyyy-MM-dd"
           placeholder="选择日期"
         ></el-date-picker>
-      </el-form-item>
+      </el-form-item> -->
       <el-form-item label="国籍">
         <el-input v-model="employee.nation" maxlength="20" />
       </el-form-item>
@@ -178,6 +204,17 @@ export default {
         return callback(new Error("请输入正确的手机号"));
       }
       return callback();
+    },
+    checkAge(rule, value, callback) {
+      if (!Number.isInteger(value)) {
+        callback(new Error('请输入整数'));
+      } else {
+          if (value < 18 || value > 70) {
+            callback(new Error('非法的年龄录入，请核验'));
+          } else {
+          callback();
+        }
+      }
     }
   }
 };
